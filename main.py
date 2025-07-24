@@ -3,6 +3,10 @@ from flask import Flask, request, jsonify
 import requests
 from bs4 import BeautifulSoup
 
+@app.route("/")
+def home():
+    return "API DigiKey este pornit!"
+
 app = Flask(__name__)
 
 @app.route("/digikey", methods=["GET"])
