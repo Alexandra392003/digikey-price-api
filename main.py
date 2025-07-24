@@ -3,11 +3,11 @@ from flask import Flask, request, jsonify
 import requests
 from bs4 import BeautifulSoup
 
+app = Flask(__name__)
+
 @app.route("/")
 def home():
     return "API DigiKey este pornit!"
-
-app = Flask(__name__)
 
 @app.route("/digikey", methods=["GET"])
 def get_digikey_info():
@@ -23,7 +23,6 @@ def get_digikey_info():
         response = requests.get(url, headers=headers, timeout=10)
         soup = BeautifulSoup(response.text, "html.parser")
 
-        # Extragem câmpurile de interes
         mpn = soup.find("span", {"data-testid": "manufacturer-part-number"})
         stock = soup.find("span", {"data-testid": "availability-msg"})
         price = soup.find("span", {"data-testid": "pricing"})
